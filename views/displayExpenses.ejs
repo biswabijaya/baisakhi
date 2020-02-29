@@ -11,33 +11,19 @@
         type="text"
         id="myInput"
         onkeyup="myFunction()"
-        placeholder="Search for vendor name "
-        title="Type vendor name"
+        placeholder="Search category "
+        title="Type category"
         />
         
-        <input
-        type="text"
-        id="myInput2"
-        onkeyup="myFunction2()"
-        placeholder="Search for district "
-        title="Type district name"
-        />
+        <a class="btn btn-secondary" href="/addExpenses"><i class="fa fa-plus"></i> Add </a>
         
-        <input
-        type="text"
-        id="myInput3"
-        onkeyup="myFunction3()"
-        placeholder="Search for State "
-        title="Type state name"
-        /> &nbsp;&nbsp;
-        <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add </a>
-        
-        <table class="table table-striped" id="vendorTable">
+        <table class="table table-striped" id="expensesTable">
             <thead>
                 <tr>
                     <th>Sl No</th>
                     <th>Category</th>
                     <th>Total Expenses</th>
+                    <th></th>
 
                 </tr>
             </thead>
@@ -52,9 +38,10 @@
                  <tr>
                      <td><%= i+1 %></td>
                      <td><%= expenses[i].category%></td>
-                     <td><a href=""><%= arrSum %></a></td>
-                     <td><a class="btn btn-success" href=""><i class="fa fa-plus" aria-hidden="true" title="add stall"></i>  Add Stall</a></td>
-
+                     <td><%= arrSum %></td>
+                     <td><a class="btn btn-success" href="/updateExpenses/<%=expenses[i]._id %>"><i class="fa fa-plus" aria-hidden="true" title="add stall"></i>  Add Expenses</a> &nbsp;&nbsp;
+                     <a class="btn btn-danger" href="/deleteExpenses/<%=expenses[i].id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash" aria-hidden="true" title="delete"></i> Delete</a> &nbsp;&nbsp;
+                    </td>
                  </tr>
              <% } %>
              </tbody>
@@ -64,7 +51,7 @@
  </div>
  
 <style>
-    #myInput, #myInput2, #myInput3
+    #myInput
       {
       width: 400px;
       font-size: 16px;
@@ -74,7 +61,7 @@
       margin: 5px;
     }
 
-    #vendorTable{
+    #expensesTable{
         margin: 5px;
     }
 
@@ -87,48 +74,10 @@
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
-        table = document.getElementById("vendorTable");
+        table = document.getElementById("expensesTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
           td = tr[i].getElementsByTagName("td")[1];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
-          }
-        }
-      }
-
-      function myFunction2() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput2");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("vendorTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[4];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
-          }
-        }
-      }
-
-      function myFunction3() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput3");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("vendorTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[5];
           if (td) {
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
