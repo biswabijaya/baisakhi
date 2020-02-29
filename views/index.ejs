@@ -5,26 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Admin</title>
 </head>
-<body>
-        <div class="container">
-            <div class="row">
-                <div class="container">
-                    <h1 style="text-align: center;">Login here</h1>
-                </div>
-                <div style="width: 30%; margin: 25px auto;">
-                    <form action="/login" method="POST">
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="username" placeholder="username" />
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="password" name="password" placeholder="password" />
-                        </div>
-                        <button class="btn btn-primary btn-block">Submit</button>
-                    </form>
-                </div>
+
+<body id="LoginForm">
+    <div class="container">
+    <div class="login-form">
+    <div class="main-div">
+        <div class="panel">
+       <h2>Admin Login</h2>
+       <p>Please enter your username and password</p>
+       </div>
+        <form id="Login" action="/login" method="POST">
+    
+            <div class="form-group">
+    
+    
+                <input type="text" class="form-control" name="username" placeholder="Username">
+    
             </div>
+    
+            <div class="form-group">
+    
+                <input type="password" class="form-control" name="password" placeholder="Password">
+    
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+    
+        </form>
         </div>
-</body>
+    </div></div></div>
+    
+    
+    </body>
 </html>

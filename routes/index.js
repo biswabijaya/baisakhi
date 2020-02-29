@@ -25,6 +25,10 @@ router.get('/payment/:id', function(req, res) {
   })
 });
 
+/* GET expenses page. */
+router.get('/expenses', function(req, res) {
+  res.render('expenses');
+});
 
 
 //GET stall allocation page
@@ -204,12 +208,27 @@ router.post('/updateParty/:id', function(req,res) {
   
   var myquery = { _id:req.params.id };
   var newvalues = req.body;
+  var name;
+  partySchema.findOne({myquery},(err,data) => {
+    name= data.name;
+  })
   partySchema.updateOne(myquery, newvalues, function(err) {
     if (err) throw err;
     else{
-      res.redirect('/display');
-    }
-    });
+    //   stallSchema.findOneAndUpdate({
+    //     "name": name
+    // }, {
+    //     "$set": {"name": newvalues.name}, 
+    //     function(err, doc) {
+    //       if (err)
+    //           throw err; // handle error;
+    
+    //       else{
+    //         res.redirect('/display');
+    //       }}
+    //     });
+    res.redirect('/display');
+  }});
 });
 
 //UPDATE stall row
@@ -227,16 +246,6 @@ router.post('/updateStall/:id', function(req,res) {
     });
 });
 
-//UPDATE stall payment row
-
-// router.post('/payment', function(req,res) {
-//   console.log(req.body.paid);
-//   stallSchema.update(
-//     { stallName: "sarthak" }, 
-//     { $push: { paid: req.body.paid } }
-// );
-// res.redirect('/collections')
-// });
 
 
 //POST payment

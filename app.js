@@ -32,8 +32,10 @@ app.use('/', routes);
 app.use('/users', users);
 
 
-mongoose.connect("mongodb+srv://sarthak-rout:Sarthak97@baisakhi-exsyw.mongodb.net/baisakhi?retryWrites=true&w=majority",{reconnectTries:Number.MAX_VALUE,poolSize:10}).then(()=>{console.log("connected")}
+mongoose.connect("mongodb+srv://banijyamela:9437023990@cluster0-hwibe.mongodb.net/baisakhi?retryWrites=true&w=majority",{reconnectTries:Number.MAX_VALUE,poolSize:10}).then(()=>{console.log("connected")}
 ,err=>{console.log(err)});
+
+
 
 
 

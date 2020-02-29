@@ -1,0 +1,142 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <div class="row">
+     <div clsss="col-md-2 admin-dashboard">
+         <%- include('tables') %>
+     </div>
+     <div class="col-md-10">
+        <h3> EXPENSES </h3><br>
+        <input
+        type="text"
+        id="myInput"
+        onkeyup="myFunction()"
+        placeholder="Search for vendor name "
+        title="Type vendor name"
+        />
+        
+        <input
+        type="text"
+        id="myInput2"
+        onkeyup="myFunction2()"
+        placeholder="Search for district "
+        title="Type district name"
+        />
+        
+        <input
+        type="text"
+        id="myInput3"
+        onkeyup="myFunction3()"
+        placeholder="Search for State "
+        title="Type state name"
+        /> &nbsp;&nbsp;
+        <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add </a>
+        
+        <table class="table table-striped" id="vendorTable">
+            <thead>
+                <tr>
+                    <th>Sl No</th>
+                    <th>Category</th>
+                    <th>Total Expenses</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < expenses.length; i++){  %>
+                 <% var arrSum = 0; %>
+                 <% for(var j = 0; j < expenses[i].expenses.length; j++){ %>
+                   <% var arrSum = arrSum + expenses[i].expenses[j]; %>
+                 <% } %>
+     
+     
+                 <tr>
+                     <td><%= i+1 %></td>
+                     <td><%= expenses[i].category%></td>
+                     <td><a href=""><%= arrSum %></a></td>
+                     <td><a class="btn btn-success" href=""><i class="fa fa-plus" aria-hidden="true" title="add stall"></i>  Add Stall</a></td>
+
+                 </tr>
+             <% } %>
+             </tbody>
+        </table>
+        
+     </div>
+ </div>
+ 
+<style>
+    #myInput, #myInput2, #myInput3
+      {
+      width: 400px;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+      margin: 5px;
+    }
+
+    #vendorTable{
+        margin: 5px;
+    }
+
+    thead{
+        background-color: #B0C4DE;
+    }
+</style>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("vendorTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+
+      function myFunction2() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput2");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("vendorTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[4];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+
+      function myFunction3() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput3");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("vendorTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[5];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+</script>
