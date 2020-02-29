@@ -10,9 +10,10 @@
             <h3>Stall Allocation</h3>
             <div class="wrapper">
                 <form action="/updateStall/<%=stall[0].id %>" method="POST" >
-                <!-- <input type="text" class="form-control" name="name" placeholder="Vendor Name" required="" autofocus="" value = "<%=stall[0].name%>"/> -->
+                <input type="text" class="form-control" name="name" placeholder="Vendor Name" required="" autofocus="" value = "<%=stall[0].name%>"style="display: none;"/>
                 <input type="text" class="form-control" name="stallName" placeholder="Stall Name" required="" autofocus="" value = "<%=stall[0].stallName%>"/>
                 <input type="text" class="form-control" name="stallType" placeholder="Stall Type" required="" autofocus="" value = "<%=stall[0].stallType%>"/>
+                <input type="number" class="form-control" name="total" placeholder="Enter total rent" required="" autofocus="" value = "<%=stall[0].total%>"/>
                 <button class="btn btn-lg btn-primary btn-block" type="Submit">Update</button>
                 </form>
             </div>

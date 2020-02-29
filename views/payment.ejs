@@ -1,0 +1,12 @@
+
+<% for(var i = 0; i < stall.paid.length; i++){ %>
+    <tr>
+        <td><%= i+1 %> Payment</td>
+        <td><%= stall.paid[i] %></td><br>
+    </tr>
+<% } %>
+
+<form action="/payment/<%- stall.id %>" method="POST">
+    <input type="number" name="paid">
+    <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+</form>

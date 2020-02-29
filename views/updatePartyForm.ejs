@@ -7,12 +7,14 @@
   </head>
 <body>
         <div class = "container">
-            <h3>Stall Allocation</h3>
+            <h3>Update Party</h3>
             <div class="wrapper">
                 <form action="/updateParty/<%=party[0].id %>" method="POST" >
                 <input type="text" class="form-control" name="name" placeholder="Vendor Name" required="" autofocus="" value = "<%=party[0].name%>"/>
                 <input type="text" class="form-control" name="address" placeholder="Address" required="" autofocus="" value = "<%=party[0].address%>"/>
                 <input type="text" class="form-control" name="phoneNo" placeholder="Phone No" required="" autofocus="" value = "<%=party[0].phoneNo%>"/>
+                <input type="text" class="form-control" name="district" placeholder="District" required="" autofocus="" value = "<%=party[0].district%>"/>
+                <input type="text" class="form-control" name="state" placeholder="State" required="" autofocus="" value = "<%=party[0].state%>"/>
                 <button class="btn btn-lg btn-primary btn-block" type="Submit">Update</button>
                 </form>
             </div>

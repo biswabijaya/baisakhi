@@ -4,15 +4,27 @@ const partySchema = require('../models/party.js')
 const stallSchema = require('../models/stall.js')
 
 
-/* GET home page. */
+/* GET admin login page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('home');
 });
 
 /* GET home page. */
-router.get('/home', function(req, res) {
-  res.render('home', { title: 'Express' });
+router.get('/admin', function(req, res) {
+  res.render('index');
 });
+
+/* GET payment page. */
+router.get('/payment/:id', function(req, res) {
+  stallSchema.findOne({_id:req.params.id},(err,data) =>{
+    if (err) console.log(err);
+    else{
+      console.log(data);
+    res.render('payment', { "stall" : data });
+  }
+  })
+});
+
 
 
 //GET stall allocation page
@@ -38,7 +50,6 @@ router.get('/updateStall/:id', function(req, res) {
   stallSchema.find({_id:req.params.id},(err,data) =>{
     if (err) console.log(err);
     else{
-      console.log(data);
     res.render('updateStallForm', { "stall" : data });
   }
   });
@@ -115,7 +126,7 @@ router.get('/party', function(req, res) {
 
 router.post('/login', function(req, res) {
   if(req.body.username === "admin@xyz.com" && req.body.password === "admin"){
-    res.render('tables', { title: 'Express'});
+    res.redirect('/display');
   } else {
     res.redirect('/');
   }
@@ -210,9 +221,39 @@ router.post('/updateStall/:id', function(req,res) {
   stallSchema.updateOne(myquery, newvalues, function(err) {
     if (err) throw err;
     else{
-      console.log(newvalues.name)
+      console.log(newvalues)
       res.redirect('/stallAllocation/'+newvalues.name+'');
     }
+    });
+});
+
+//UPDATE stall payment row
+
+// router.post('/payment', function(req,res) {
+//   console.log(req.body.paid);
+//   stallSchema.update(
+//     { stallName: "sarthak" }, 
+//     { $push: { paid: req.body.paid } }
+// );
+// res.redirect('/collections')
+// });
+
+
+//POST payment
+
+router.post('/payment/:id', (req, res) => {
+  // Checks if the eventID is a valid event ID
+    stallSchema.findOne({ _id:req.params.id}, (err, stall) => {
+      stall.paid.push(req.body.paid)
+      stall.save((err, data) => {
+        if (err) {
+          console.log(err);
+          res.send("F");
+        }
+        else {
+          res.redirect('/collections');
+        }
+      });
     });
 });
 

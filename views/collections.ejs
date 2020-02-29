@@ -30,15 +30,21 @@
             </tr>
         </thead>
         <tbody>
-           <% for(var i = 0; i < stall.length; i++){ %>
+           <% for(var i = 0; i < stall.length; i++){  %>
+            <% var arrSum = 0; %>
+            <% for(var j = 0; j < stall[i].paid.length; j++){ %>
+              <% var arrSum = arrSum + stall[i].paid[j]; %>
+            <% } %>
+
+
             <tr>
                 <td><%= i+1 %></td>
                 <td><%= stall[i].name %></td>
                 <td><%= stall[i].stallName %></td>
                 <td><%= stall[i].stallType %></td>
                 <td><%= stall[i].total %></td>
-                <td><%= stall[i].paid %></td>
-                <td><%= stall[i].total - stall[i].paid %></td>
+                <td><a href="/payment/<%- stall[i]._id %>"><%= arrSum %></a></td>
+                <td><%= stall[i].total - arrSum %></td>
 
             </tr>
         <% } %>
@@ -47,6 +53,8 @@
     
    </div>
  </div>
+ 
+ 
 
 <style>
     #myInput, #myInput2, #myInput3
@@ -127,3 +135,4 @@
         }
       }
 </script>
+

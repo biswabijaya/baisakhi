@@ -7,14 +7,7 @@
     <%- include('tables') %>
    </div>
    <div class="col-md-10">
-     <h3>LIST OF STALLS</h3>
-    <input
-    type="text"
-    id="myInput"
-    onkeyup="myFunction()"
-    placeholder="Search for vendor name "
-    title="Type vendor name"
-    />
+     <h3>LIST OF STALLS </h3>
     
     <input
     type="text"
@@ -29,7 +22,7 @@
             <thead>
                 <tr>
                     <th>Sl No</th>
-                    <th>Vendor Name</th>
+                    <!-- <th>Vendor Name</th> -->
                     <th>Stall Name</th>
                     <th>Stall Type</th>
                     <th></th>
@@ -39,7 +32,7 @@
                <% for(var i = 0; i < stall.length; i++){ %>
                 <tr>
                     <td><%= i+1 %></td>
-                    <td><%= stall[i].name %></td>
+                    <!-- <td><%= stall[i].name %></td> -->
                     <td><%= stall[i].stallName %></td>
                     <td><%= stall[i].stallType %></td>
                     <td>
@@ -55,7 +48,7 @@
  
 
     <style>
-        #myInput, #myInput2, #myInput3
+        #myInput2
           {
           background-repeat: no-repeat;
           width: 400px;
@@ -76,25 +69,6 @@
     </style>
     
     <script>
-        function myFunction() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("stalls");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-              td = tr[i].getElementsByTagName("td")[1];
-              if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                  tr[i].style.display = "";
-                } else {
-                  tr[i].style.display = "none";
-                }
-              }
-            }
-          }
-    
           function myFunction2() {
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("myInput2");
@@ -102,7 +76,7 @@
             table = document.getElementById("stalls");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-              td = tr[i].getElementsByTagName("td")[2];
+              td = tr[i].getElementsByTagName("td")[1];
               if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
