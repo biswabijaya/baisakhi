@@ -7,9 +7,10 @@
   </head>
   <body>
     <div class = "container">
-        <h3>Expenses Details</h3>
     	<div class="wrapper">
-    		<form action="/addExpenses" method="POST" >
+        <form action="/addExpenses" method="POST" >
+          <h3 class="form-signin-heading">Add Details</h3>
+                  <hr class="colorgraph"><br>
             <input type="text" class="form-control" name="category" placeholder="Enter Category" required="" autofocus="" />
             <input type="Number" class="form-control" name="expenses" placeholder="Enter expenses" required="" autofocus="" />
     		<button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
@@ -20,3 +21,19 @@
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
   </body>
 </html>
+
+<style>
+  .wrapper {
+    padding: 12px 20px;
+    margin: 20px;
+    border: 3px solid #f1f1f1;
+
+
+  }
+  input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  }
+</style>
+

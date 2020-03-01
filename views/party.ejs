@@ -10,11 +10,16 @@
     	<div class="wrapper">
     		<form action="/party" method="POST" >
     		    <h3 class="form-signin-heading">Add Vendor</h3>
-    			  <hr class="colorgraph"><br>
+            <hr class="colorgraph"><br>
+            <label><b>Vendorname:</b></label>
             <input type="text" class="form-control" name="name" placeholder="Vendor Name" required="" autofocus="" />
+            <label><b>Address:</b></label>
             <input type="text" class="form-control" name="address" placeholder="Address" required="" autofocus="" />
+            <label><b>Phone Number:</b></label>
             <input type="text" class="form-control" name="phoneNo" placeholder="Phone Number" required="" autofocus="" />
+            <label><b>District:</b></label>
             <input type="text" class="form-control" name="district" placeholder="District" required="" autofocus="" />
+            <label><b>State:  </b></label>
             <input type="text" class="form-control" name="state" placeholder="State" required="" autofocus="" />
     		<button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
     		</form>
@@ -24,3 +29,18 @@
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
   </body>
 </html>
+
+<style>
+  .wrapper {
+    padding: 12px 20px;
+    margin: 20px;
+    border: 3px solid #f1f1f1;
+
+
+  }
+  input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  }
+</style>

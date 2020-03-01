@@ -1,12 +1,47 @@
 
-<% for(var i = 0; i < stall.paid.length; i++){ %>
-    <tr>
-        <td><%= i+1 %> Payment</td>
-        <td><%= stall.paid[i] %></td><br>
-    </tr>
-<% } %>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Baisakhi Mela</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  </head>
+  <body>
+    <div class = "container">
+    	<div class="wrapper">    		    
+            <% for(var i = 0; i < stall.paid.length; i++){ %>
+                <tr>
+                    <td><%= i+1 %> Payment</td>
+                    <td><%= stall.paid[i] %></td><br>
+                </tr>
+            <% } %>
+            
+            <form action="/payment/<%- stall.id %>" method="POST">
+                <h3 class="form-signin-heading">Next Payment</h3>
+                  <hr class="colorgraph"><br>
+                <label><b>Next payment:</b></label>
+                <input type="number" class="form-control" name="paid" placeholder="Enter the amount" required="" autofocus="" />
+                <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+            </form>
+    	</div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  </body>
+</html>
 
-<form action="/payment/<%- stall.id %>" method="POST">
-    <input type="number" name="paid">
-    <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
-</form>
+<style>
+  .wrapper {
+    padding: 12px 20px;
+    margin: 20px;
+    border: 3px solid #f1f1f1;
+
+
+  }
+  input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  }
+
+</style>
