@@ -46,6 +46,13 @@ router.get('/addExpenses', function(req, res) {
   res.render('addExpenses');
 });
 
+
+/* GET moneyReceiptPage page. */
+router.get('/moneyReceiptPage', function(req, res) {
+  res.render('moneyReceiptPage');
+});
+
+
 /* GET updateExpenses page. */
 router.get('/updateExpenses/:id', function(req, res) {
   expensesSchema.findOne({_id:req.params.id},(err,data) =>{
