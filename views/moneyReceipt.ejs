@@ -8,19 +8,23 @@
      <div class="col-md-10">
         <div class = "container">
             <div class="wrapper">
-                <form action="/eventMaster" method="POST" >
-                    <h3 class="form-signin-heading">EVENT ENTRY</h3>
+                <form action="/moneyReceipt" method="POST" >
+                    <h3 class="form-signin-heading">PAYMENT WINDOW</h3>
                 <hr class="colorgraph"><br>
-                <label><b>Event Name:</b></label>
+                <label><b>Event:</b></label>
                 <input type="text" class="form-control" name="nameEvent" placeholder="Event Name" required="" autofocus="" />
-                <label><b>Location:</b></label>
-                <input type="text" class="form-control" name="location" placeholder="Location" required="" autofocus="" />
-                <label><b>From:</b></label>
-                <input type="date" class="form-control" name="dateFrom" placeholder="" required="" autofocus="" />
-                <label><b>To:</b></label>
-                <input type="date" class="form-control" name="dateTo" placeholder="" required="" autofocus="" />
-                <label><b>No of Days:</b></label>
-                <input type="number" class="form-control" name="district" placeholder="no of days" required="" autofocus="" />
+                <label><b>Head:</b></label>
+                <input type="text" class="form-control" name="head" placeholder="Location" required="" autofocus="" />
+                <label><b>Sub Head:</b></label>
+                <input type="text" class="form-control" name="subHead" placeholder="Location" required="" autofocus="" />
+                <label><b>Paid To:</b></label>
+                <input type="text" class="form-control" name="paidTo" placeholder="Location" required="" autofocus="" />
+                <label><b>Amount:</b></label>
+                <input type="number" class="form-control" name="amount" placeholder="Location" required="" autofocus="" />
+                <label><b>Payment By:</b></label>
+                <input type="text" class="form-control" name="paymentBy" placeholder="Location" required="" autofocus="" />
+                <label><b>Payment Date:</b></label>
+                <input type="date" class="form-control" name="paymentDate" placeholder="" required="" autofocus="" />
                 <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
                 </form>
             </div>

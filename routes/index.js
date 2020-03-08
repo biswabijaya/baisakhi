@@ -4,6 +4,8 @@ const partySchema = require('../models/party.js')
 const stallSchema = require('../models/stall.js')
 const expensesSchema = require('../models/expenses.js')
 const eventSchema = require('../models/events.js')
+const paymentSchema = require('../models/payment.js')
+
 
 
 
@@ -124,7 +126,17 @@ router.get('/allStalls', function(req, res) {
   stallSchema.find({},(err, data) => {
     if (err) console.log(err);
     else{
-    res.render('stallAllocation', { "stall" : data });
+    eventSchema.find({},(err, data1) => {
+      if (err) console.log(err);
+      else{
+        partySchema.find({},(err, data2) => {
+          if (err) console.log(err);
+          else{
+            res.render('stallAllocation', {"stall" : data, "event" : data1, "party" : data2});
+          }
+        });
+      }
+    });
   }
 });  
 
@@ -159,6 +171,13 @@ router.get('/eventMaster', function(req, res) {
       
 });
 
+/* GET moneyReceipt page */
+
+router.get('/moneyReceipt', function(req, res) {
+  res.render('moneyReceipt');
+      
+});
+
 //GET login Page
 router.post('/login', function(req, res) {
   if(req.body.username === "admin@xyz.com" && req.body.password === "admin"){
@@ -188,6 +207,17 @@ router.post('/eventMaster', function(req, res) {
     .then(res.redirect('/eventMaster'))
     .catch((err) => console.log(err))
 });
+
+/* GET moneyReceipt details*/
+
+router.post('/moneyReceipt', function(req, res) {
+  console.log(req.body);
+  let newMoneyReceipt = new paymentSchema(req.body);
+  newMoneyReceipt.save()
+    .then(res.redirect('/moneyReceipt'))
+    .catch((err) => console.log(err))
+});
+
 
 //GET stall details
 

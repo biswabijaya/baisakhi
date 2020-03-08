@@ -13,9 +13,23 @@
           <h3 class="form-signin-heading">STALL ALLOTMENT</h3> 
             <hr class="colorgraph"><br>
             <label><b>Event:</b></label>
-            <input type="text" class="form-control" name="nameEvent" placeholder="" required="" autofocus=""/> &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add Event</a> <br>
+            <input list="events" type="text" class="form-control" name="nameEvent" placeholder="" required="" autofocus=""/> 
+            <datalist id="events">
+              <% for(var i=0; i<event.length; i++ ){ %>
+                <option value="<%=event[i].nameEvent%>">
+                <% } %>
+            </datalist>
+            &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add Event</a> <br>
+
             <label><b>Name of Party:</b></label>
-            <input type="text" class="form-control" name="name_party" placeholder="" required="" autofocus="" /> &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add Party</a> <br>
+            <input list="party" type="text" class="form-control" name="name" placeholder="" required="" autofocus="" /> 
+            <datalist id="party">
+              <% for(var i=0; i<party.length; i++ ){ %>
+                <option value="<%=party[i].name%>">
+                <% } %>
+            </datalist>
+            &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add Party</a> <br>
+
             <label><b>Type of Stall:</b></label>
             <input type="text" class="form-control" name="stallType" placeholder="Type" required="" autofocus="" /> &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add New Type</a> <br>
             <label><b>Rate:</b></label>
@@ -47,5 +61,8 @@
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
+  }
+  label{
+    text-align: right;
   }
 </style>

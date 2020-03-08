@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
   var stallSchema = new Schema({
     nameEvent: {type: String, default: 'sarthak'},
-    nameParty:  {type: String, default: 'sarthak enterprisers'},
+    name:  {type: String, default: 'sarthak enterprisers'},
     stallType:  {type: String, default: 'food'},
     rate: {type: [Number]},
     booked: {type : Date, default: Date.now}
