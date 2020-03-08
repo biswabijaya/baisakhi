@@ -7,132 +7,45 @@
 
    </div>
    <div class="col-md-10 table-body">
-    <h3>Stall Allocation</h3>
-    
-    <input
-    type="text"
-    id="myInput"
-    onkeyup="myFunction()"
-    placeholder="Search for vendor name "
-    title="Type vendor name"
-    />
-    
-    <input
-    type="text"
-    id="myInput2"
-    onkeyup="myFunction2()"
-    placeholder="Search for stall name "
-    title="Type stall name"
-    />
-    
-    <input
-    type="text"
-    id="myInput3"
-    onkeyup="myFunction3()"
-    placeholder="Search for stall type "
-    title="Type stall type"
-    /> 
-    <table class="table table-striped" id="stallTable"> 
-        <thead>
-            <tr>
-                <th>Sl No</th>
-                <th>Vendor Name</th>
-                <th>Stall Name</th>
-                <th>Stall Type</th>
-            </tr>
-        </thead>
-        <tbody>
-           <% for(var i = 0; i < stall.length; i++){ %>
-            <tr>
-                <td><%= i+1 %></td>
-                <td><%= stall[i].name %></td>
-                <td><%= stall[i].stallName %></td>
-                <td><%= stall[i].stallType %></td>
-            </tr>
-        <% } %>
-        </tbody>
-    </table>
+    <div class = "container">
+    	<div class="wrapper">
+        <form action="/addNewStall" method="POST" >
+          <h3 class="form-signin-heading">STALL ALLOTMENT</h3> 
+            <hr class="colorgraph"><br>
+            <label><b>Event:</b></label>
+            <input type="text" class="form-control" name="nameEvent" placeholder="" required="" autofocus=""/> &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add Event</a> <br>
+            <label><b>Name of Party:</b></label>
+            <input type="text" class="form-control" name="name_party" placeholder="" required="" autofocus="" /> &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add Party</a> <br>
+            <label><b>Type of Stall:</b></label>
+            <input type="text" class="form-control" name="stallType" placeholder="Type" required="" autofocus="" /> &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add New Type</a> <br>
+            <label><b>Rate:</b></label>
+            <input type="number" class="form-control" name="total" placeholder="Enter total rent" required="" autofocus="" /> <br>
+            <label><b>Booked on:</b></label>
+            <input type="date" class="form-control" name="booked" placeholder="" required="" autofocus="" /> <br>
+
+    		<button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+    		</form>
+    	</div>
+    </div>
     
    </div>
  </div>
 
-<style>
-    #myInput, #myInput2, #myInput3
-      {
-      background-repeat: no-repeat;
-      width: 400px;
-      font-size: 16px;
-      padding: 12px 20px 12px 40px;
-      border: 1px solid #ddd;
-      margin-bottom: 12px;
-      margin: 5px;
-    }
+ <style>
+   .form-control{
+     display: inline-block;
+     width: 70%;
+   }
+  .wrapper {
+    padding: 12px 20px;
+    margin: 20px;
+    border: 3px solid #f1f1f1;
 
-    #stallTable{
-        margin: 5px;
 
-    }
-
-    thead{
-        background-color: #B0C4DE;
-    }
+  }
+  input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  }
 </style>
-
-<script>
-    function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("stallTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[1];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
-          }
-        }
-      }
-
-      function myFunction2() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput2");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("stallTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[2];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
-          }
-        }
-      }
-
-      function myFunction3() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput3");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("stallTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[3];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
-          }
-        }
-      }
-</script>

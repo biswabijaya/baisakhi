@@ -3,6 +3,7 @@ var router = express.Router();
 const partySchema = require('../models/party.js')
 const stallSchema = require('../models/stall.js')
 const expensesSchema = require('../models/expenses.js')
+const eventSchema = require('../models/events.js')
 
 
 
@@ -60,6 +61,13 @@ router.get('/updateExpenses/:id', function(req, res) {
 router.get('/addStall/:name', function(req, res) {
 res.render('stall',{name:req.params.name});
 });
+
+//GET addNewStall page
+router.get('/addNewStall', function(req, res) {
+  res.render('addNewStall');
+      
+});
+
 
 //GET updatePartyForm
 
@@ -144,7 +152,14 @@ router.get('/party', function(req, res) {
         
 });
 
+/* GET eventMaster page */
 
+router.get('/eventMaster', function(req, res) {
+  res.render('eventMaster');
+      
+});
+
+//GET login Page
 router.post('/login', function(req, res) {
   if(req.body.username === "admin@xyz.com" && req.body.password === "admin"){
     res.redirect('/display');
@@ -164,6 +179,16 @@ router.post('/party', function(req, res) {
     .catch((err) => console.log(err))
 });
 
+/* GET event details*/
+
+router.post('/eventMaster', function(req, res) {
+  console.log(req.body);
+  let newEvent = new eventSchema(req.body);
+  newEvent.save()
+    .then(res.redirect('/eventMaster'))
+    .catch((err) => console.log(err))
+});
+
 //GET stall details
 
 router.post('/addStall', function(req, res) {
@@ -171,6 +196,16 @@ router.post('/addStall', function(req, res) {
   let newStall = new stallSchema(req.body);
   newStall.save()
     .then(res.redirect('/display'))
+    .catch((err) => console.log(err))
+});
+
+//GET addNewstall details
+
+router.post('/addNewStall', function(req, res) {
+  console.log(req.body);
+  let addNewStall = new stallSchema(req.body);
+  addNewStall.save()
+    .then(res.redirect('/allStalls'))
     .catch((err) => console.log(err))
 });
 

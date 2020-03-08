@@ -6,143 +6,39 @@
          <%- include('tables') %>
      </div>
      <div class="col-md-10">
-        <h3> LIST OF VENDORS </h3><br>
-        <input
-        type="text"
-        id="myInput"
-        onkeyup="myFunction()"
-        placeholder="Search for vendor name "
-        title="Type vendor name"
-        />
-        
-        <input
-        type="text"
-        id="myInput2"
-        onkeyup="myFunction2()"
-        placeholder="Search for district "
-        title="Type district name"
-        />
-        
-        <input
-        type="text"
-        id="myInput3"
-        onkeyup="myFunction3()"
-        placeholder="Search for State "
-        title="Type state name"
-        /> &nbsp;&nbsp;
-        <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add Vendor</a>
-        
-        <table class="table table-striped" id="vendorTable">
-            <thead>
-                <tr>
-                    <th>Sl No</th>
-                    <th>Vendor Name</th>
-                    <th>Address</th>
-                    <th>Phone No</th>
-                    <th>District</th>
-                    <th>State</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-               <% for(var i = 0; i < party.length; i++){ %>
-                <tr>
-                    <td><%= i+1 %></td>
-                    <td><%= party[i].name %></td>
-                    <td><%= party[i].address %></td>
-                    <td><%= party[i].phoneNo %></td>
-                    <td><%= party[i].district %></td>
-                    <td><%= party[i].state %></td>
-                    <td>
-                        <a class="btn btn-warning" href="/updateParty/<%=party[i].id %>"><i class="fa fa-pencil " aria-hidden="true" title="update"></i> Update</a> &nbsp;&nbsp;
-                        <a class="btn btn-danger" href="/deleteParty/<%=party[i].id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash" aria-hidden="true" title="delete"></i> Delete</a> &nbsp;&nbsp;
-                        <a class="btn btn-success" href="/addStall/<%=party[i].name %>"><i class="fa fa-plus" aria-hidden="true" title="add stall"></i>  Add Stall</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="btn btn-dark" href="/stallAllocation/<%=party[i].name %>"><i class="fa fa-table" aria-hidden="true" title="view stall"></i> View Stalls</a> 
-        
-        
-                    </td>
-                </tr>
-            <% } %>
-            </tbody>
-        </table>
-        
+      <div class = "container">
+        <div class="wrapper">
+          <form action="/party" method="POST" >
+              <h3 class="form-signin-heading">PARTY MASTER ENTRY</h3>
+              <hr class="colorgraph"><br>
+              <label><b>Vendorname:</b></label>
+              <input type="text" class="form-control" name="name" placeholder="Vendor Name" required="" autofocus="" />
+              <label><b>Address:</b></label>
+              <input type="text" class="form-control" name="address" placeholder="Address" required="" autofocus="" />
+              <label><b>Phone Number:</b></label>
+              <input type="text" class="form-control" name="phoneNo" placeholder="Phone Number" required="" autofocus="" />
+              <label><b>District:</b></label>
+              <input type="text" class="form-control" name="district" placeholder="District" required="" autofocus="" />
+              <label><b>State:  </b></label>
+              <input type="text" class="form-control" name="state" placeholder="State" required="" autofocus="" />
+          <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+          </form>
+        </div>
+      </div>
      </div>
  </div>
  
-<style>
-    #myInput, #myInput2, #myInput3
-      {
-      width: 400px;
-      font-size: 16px;
-      padding: 12px 20px 12px 40px;
-      border: 1px solid #ddd;
-      margin-bottom: 12px;
-      margin: 5px;
-    }
+ <style>
+  .wrapper {
+    padding: 12px 20px;
+    margin: 20px;
+    border: 3px solid #f1f1f1;
 
-    #vendorTable{
-        margin: 5px;
-    }
 
-    thead{
-        background-color: #B0C4DE;
-    }
+  }
+  input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  }
 </style>
-<script>
-    function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("vendorTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[1];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
-          }
-        }
-      }
-
-      function myFunction2() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput2");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("vendorTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[4];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
-          }
-        }
-      }
-
-      function myFunction3() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput3");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("vendorTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[5];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
-            }
-          }
-        }
-      }
-</script>

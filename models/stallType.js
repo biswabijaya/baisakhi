@@ -2,11 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
   var stallSchema = new Schema({
-    nameEvent: {type: String, default: 'sarthak'},
-    nameParty:  {type: String, default: 'sarthak enterprisers'},
     stallType:  {type: String, default: 'food'},
-    rate: {type: [Number]},
-    booked: {type : Date, default: Date.now}
+    stallFrom: {type: Number, default:0},
+    stallTo: {type: Number, default:0},
+    noOfStall: {type: Number}
   });
 
   var stall = mongoose.model('stalls',stallSchema);
