@@ -185,6 +185,12 @@ router.get('/moneyReceipt', function(req, res) {
       
 });
 
+
+//print receipt
+
+router.get('/test', function(req, res) {
+  res.render('test');
+});
 //GET login Page
 router.post('/login', function(req, res) {
   if(req.body.username === "admin@xyz.com" && req.body.password === "admin"){
@@ -318,6 +324,7 @@ router.get('/deleteExpenses/:id', function(req, res, next){
 })
 })
 });
+
 
 
 //UPDATE party row
