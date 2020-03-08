@@ -19,7 +19,7 @@
                 <option value="<%=event[i].nameEvent%>">
                 <% } %>
             </datalist>
-            &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add Event</a> <br>
+            &nbsp;&nbsp; <a class="btn btn-secondary" href="/eventMaster"><i class="fa fa-plus"></i> Add Event</a> <br>
 
             <label><b>Name of Party:</b></label>
             <input list="party" type="text" class="form-control" name="name" placeholder="" required="" autofocus="" /> 
@@ -28,10 +28,12 @@
                 <option value="<%=party[i].name%>">
                 <% } %>
             </datalist>
-            &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add Party</a> <br>
+            &nbsp;&nbsp; <a class="btn btn-secondary" href="/display"><i class="fa fa-plus"></i> Add Party</a> <br>
 
             <label><b>Type of Stall:</b></label>
-            <input type="text" class="form-control" name="stallType" placeholder="Type" required="" autofocus="" /> &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add New Type</a> <br>
+            <input type="text" class="form-control" name="stallType" placeholder="Type" required="" autofocus="" /> &nbsp;&nbsp; 
+            <a class="btn btn-secondary" href="/stallType"><i class="fa fa-plus"></i> Add New Type</a> <br>
+
             <label><b>Rate:</b></label>
             <input type="number" class="form-control" name="total" placeholder="Enter total rent" required="" autofocus="" /> <br>
             <label><b>Booked on:</b></label>
