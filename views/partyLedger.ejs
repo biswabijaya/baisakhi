@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <div class="row">
+   <div class="col-md-2 admin-dashboard" >
+    <%- include('tables') %>
+
+   </div>
+   <div class="col-md-10">
+    <h3>Stall Collections</h3>
+    
+    <input
+    type="text"
+    id="myInput2"
+    onkeyup="myFunction2()"
+    placeholder="Search for Party "
+    title="Type stall name"
+    />
+    
+    <table class="table table-striped" id="partyTable"> 
+        <thead>
+            <tr>
+                <th>Sl No</th>
+                <th>Party Name</th>
+                <th>Address</th>
+                <th>State</th>
+                <th>District</th>
+                <th>PIN</th>
+                <th>Phone No</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < party.length; i++){ %>
+            <tr>
+                <td><%= i+1 %></td>
+                <td><%= party[i].nameParty %></td>
+                <td><%= party[i].address %></td>
+                <td><%= party[i].state %></td>
+                <td><%= party[i].district %></td>
+                <td><%= party[i].pin %></td>
+                <td><%= party[i].phoneNo %></td>
+                <td>
+                    <a class="btn btn-warning" href="/updateParty/<%=party[i].id %>"><i class="fa fa-pencil " aria-hidden="true" title="update"></i> Update</a> &nbsp;&nbsp;
+                    <a class="btn btn-danger" href="/deleteParty/<%=party[i].id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash" aria-hidden="true" title="delete"></i> Delete</a> &nbsp;&nbsp;
+                </td>
+
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+    
+   </div>
+ </div>
+ 
+ 
+
+<style>
+   #myInput2
+      {
+      background-repeat: no-repeat;
+      width: 400px;
+      font-size: 16px;
+      padding: 12px 20px 12px 40px;
+      border: 1px solid #ddd;
+      margin-bottom: 12px;
+      margin: 5px;
+    }
+
+    #stallTable{
+        margin: 5px;
+    }
+
+    thead{
+        background-color: #B0C4DE;
+    }
+</style>
+
+<script>
+
+      function myFunction2() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput2");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("partyTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+</script>
+

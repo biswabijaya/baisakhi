@@ -32,19 +32,19 @@
         <tbody>
            <% for(var i = 0; i < stall.length; i++){  %>
             <% var arrSum = 0; %>
-            <% for(var j = 0; j < stall[i].paid.length; j++){ %>
-              <% var arrSum = arrSum + stall[i].paid[j]; %>
+            <% for(var j = 0; j < stall[i].rate.length; j++){ %>
+              <% var arrSum = arrSum + stall[i].rate[j]; %>
             <% } %>
 
 
             <tr>
                 <td><%= i+1 %></td>
-                <td><%= stall[i].name %></td>
-                <td><%= stall[i].stallName %></td>
+                <td><%= stall[i].nameEvent %></td>
+                <td><%= stall[i].nameParty %></td>
                 <td><%= stall[i].stallType %></td>
-                <td><%= stall[i].total %></td>
+                <td><%= stall[i].rate %></td>
                 <td><a href="/payment/<%- stall[i]._id %>"><%= arrSum %></a></td>
-                <td><%= stall[i].total - arrSum %></td>
+                <td><%= stall[i].rate - arrSum %></td>
 
             </tr>
         <% } %>

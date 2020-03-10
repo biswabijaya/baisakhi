@@ -32,10 +32,10 @@ router.get('/payment/:id', function(req, res) {
 
 /* GET expenses page. */
 router.get('/expenses', function(req, res) {
-  expensesSchema.find({},(err, data) => {
+  paymentSchema.find({},(err, data) => {
     if (err) console.log(err);
     else{
-    res.render('displayExpenses', { "expenses" : data });
+    res.render('displayExpenses', { "payment" : data });
   }
 });  
 
@@ -161,6 +161,17 @@ router.get('/collections', function(req, res) {
 
 });
 
+//GET partyLedger page
+
+router.get('/partyLedger', function(req, res) {
+  partySchema.find({},(err, data) => {
+    if (err) console.log(err);
+    else{
+    res.render('partyLedger', { "party" : data });
+  }
+});  
+
+});
 
 
 
@@ -207,7 +218,7 @@ router.post('/login', function(req, res) {
 router.post('/party', function(req, res) {
   let newParty = new partySchema(req.body);
   newParty.save()
-    .then(res.redirect('/display'))
+    .then(res.redirect('/party'))
     .catch((err) => console.log(err))
 });
 
@@ -227,7 +238,7 @@ router.post('/moneyReceipt', function(req, res) {
   console.log(req.body);
   let newMoneyReceipt = new paymentSchema(req.body);
   newMoneyReceipt.save()
-    .then(res.redirect('/moneyReceipt'))
+    .then(res.redirect('/moneyReceiptPage'))
     .catch((err) => console.log(err))
 });
 
@@ -281,7 +292,7 @@ router.get('/deleteParty/:id', function(req, res, next){
   
       }
 
-  res.redirect('/display')
+  res.redirect('/partyLedger')
     })
     })
 })
@@ -342,7 +353,7 @@ router.post('/updateParty/:id', function(req,res) {
       else{
 
         stallSchema.updateMany({name:name},{name:req.body.name},()=>{
-          res.redirect('/display');
+          res.redirect('/partyLedger');
         })
 
 

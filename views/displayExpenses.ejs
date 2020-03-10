@@ -14,34 +14,27 @@
         placeholder="Search category "
         title="Type category"
         />
-        
-        <a class="btn btn-secondary" href="/addExpenses"><i class="fa fa-plus"></i> Add </a>
-        
+                
         <table class="table table-striped" id="expensesTable">
             <thead>
                 <tr>
                     <th>Sl No</th>
-                    <th>Category</th>
-                    <th>Total Expenses</th>
-                    <th></th>
+                    <th>HEAD</th>
+                    <th>SUBHEAD</th>
+                    <th>PAID TO</th>
+                    <th>AMOUNT</th>
 
                 </tr>
             </thead>
             <tbody>
-                <% for(var i = 0; i < expenses.length; i++){  %>
-                 <% var arrSum = 0; %>
-                 <% for(var j = 0; j < expenses[i].expenses.length; j++){ %>
-                   <% var arrSum = arrSum + expenses[i].expenses[j]; %>
-                 <% } %>
-     
+                <% for(var i = 0; i < payment.length; i++){  %>     
      
                  <tr>
                      <td><%= i+1 %></td>
-                     <td><%= expenses[i].category%></td>
-                     <td><%= arrSum %></td>
-                     <td><a class="btn btn-success" href="/updateExpenses/<%=expenses[i]._id %>"><i class="fa fa-plus" aria-hidden="true" title="add stall"></i>  Add Expenses</a> &nbsp;&nbsp;
-                     <a class="btn btn-danger" href="/deleteExpenses/<%=expenses[i].id %>" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash" aria-hidden="true" title="delete"></i> Delete</a> &nbsp;&nbsp;
-                    </td>
+                     <td><%= payment[i].head%></td>
+                     <td><%= payment[i].subHead %></td>
+                     <td><%= payment[i].paidTo %></td>
+                     <td><%= payment[i].amount %></td>
                  </tr>
              <% } %>
              </tbody>

@@ -1,15 +1,46 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>SignUp</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  </head>
-  <body>
-    
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-  </body>
-</html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <div class="row">
+     <div class="col-md-2 admin-dashboard">
+         <%- include('tables') %>
+     </div>
+     <div class="col-md-10">
+      <div class = "container">
+        <div class="wrapper">
+          <form action="/party" method="POST" >
+              <h3 class="form-signin-heading">PARTY MASTER ENTRY</h3>
+              <hr class="colorgraph"><br>
+              <label><b>Name of Party:</b></label>
+              <input type="text" class="form-control" name="nameParty" placeholder="Enter party name" required="" autofocus="" />
+              <label><b>Address:</b></label>
+              <input type="text" class="form-control" name="address" placeholder="Address" required="" autofocus="" />
+              <label><b>Phone Number:</b></label>
+              <input type="text" class="form-control" name="phoneNo" placeholder="Phone Number" required="" autofocus="" />
+              <label><b>District:</b></label>
+              <input type="text" class="form-control" name="district" placeholder="District" required="" autofocus="" />
+              <label><b>State:  </b></label>
+              <input type="text" class="form-control" name="state" placeholder="State" required="" autofocus="" />
+              <label><b>PinCode:  </b></label>
+              <input type="text" class="form-control" name="pin" placeholder="State" required="" autofocus="" />
+          <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+          </form>
+        </div>
+      </div>
+     </div>
+ </div>
+ 
+ <style>
+  .wrapper {
+    padding: 12px 20px;
+    margin: 20px;
+    border: 3px solid #f1f1f1;
 
 
+  }
+  input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  }
+</style>
