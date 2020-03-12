@@ -5,6 +5,8 @@ const stallSchema = require('../models/stall.js')
 const expensesSchema = require('../models/expenses.js')
 const eventSchema = require('../models/events.js')
 const paymentSchema = require('../models/payment.js')
+const stallTypeSchema = require('../models/stallType.js')
+
 
 
 
@@ -12,6 +14,11 @@ const paymentSchema = require('../models/payment.js')
 /* GET admin login page. */
 router.get('/', function(req, res) {
   res.render('home');
+});
+
+/* GET stallType page. */
+router.get('/stallType', function(req, res) {
+  res.render('stallType');
 });
 
 /* GET home page. */
@@ -139,7 +146,13 @@ router.get('/allStalls', function(req, res) {
         partySchema.find({},(err, data2) => {
           if (err) console.log(err);
           else{
-            res.render('stallAllocation', {"stall" : data, "event" : data1, "party" : data2});
+            stallTypeSchema.find({},(err,data3) => {
+              if (err) console.log(err);
+              else{
+                res.render('stallAllocation', {"stall" : data, "event" : data1, "party" : data2, "stallType" : data3});
+
+              }
+            });
           }
         });
       }
@@ -250,6 +263,15 @@ router.post('/addStall', function(req, res) {
   let newStall = new stallSchema(req.body);
   newStall.save()
     .then(res.redirect('/display'))
+    .catch((err) => console.log(err))
+});
+
+/* GET stallType details*/
+
+router.post('/stallType', function(req, res) {
+  let newStallType = new stallTypeSchema(req.body);
+  newStallType.save()
+    .then(res.redirect('/allStalls'))
     .catch((err) => console.log(err))
 });
 

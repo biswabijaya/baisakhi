@@ -31,8 +31,17 @@
             &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add Party</a> <br>
 
             <label><b>Type of Stall:</b></label>
-            <input type="text" class="form-control" name="stallType" placeholder="Type" required="" autofocus="" /> &nbsp;&nbsp; 
+            <input list="stallType" type="text" class="form-control" name="stallType" placeholder="Type of stall" required="" autofocus="" /> 
+            <datalist id="stallType">
+              <% for(var i=0; i<stallType.length; i++ ){ %>
+                <option value="<%=stallType[i].stallType%>">
+                <% } %>
+            </datalist>
             <a class="btn btn-secondary" href="/stallType"><i class="fa fa-plus"></i> Add New Type</a> <br>
+            <label><b>Row From:</b></label>
+            <input type="number" class="form-control" name="stallFrom" placeholder="From" required="" autofocus="" /> <br>
+            <label><b>Row To:</b></label>
+            <input type="number" class="form-control" name="stallTo" placeholder="To" required="" autofocus="" /> <br>
 
             <label><b>Rate:</b></label>
             <input type="number" class="form-control" name="rate" placeholder="Enter total rent" required="" autofocus="" /> <br>
