@@ -1,0 +1,12 @@
+<%- function calcAmount(val,x) {
+    console.log(x);
+    var a = 0;
+    for(i=0; i<stall.length; i++){
+        if(stall[i].nameParty == val) {
+            a= int(a) + int(stall[i].rate);
+        }
+        console.log(a)
+    }
+    document.getElementById("amount").innerHTML = a;
+  }
+  %>

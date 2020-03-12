@@ -1,0 +1,94 @@
+  <script>
+    function calcAmount(val) {
+        var stallName = new Array(<%= stall.length  %>)
+        var stallRate = new Array(<%= stall.length  %>)
+        var length= <%= stall.length  %>
+        <% for(var i=0;i<stall.length;i++){ %>
+           stallName[ <%=i %>]= "<%=stall[i].nameParty %>"
+           stallRate[ <%=i %>]= "<%=stall[i].rate %>"
+        <%}%>
+
+      var a = 0;
+      for(i=0; i<length; i++){
+          if(stallName[i] == val) {
+              a= a + Number(stallRate[i]);
+          }
+          console.log(a)
+      }
+      document.getElementById("amount").value = a;
+    }
+</script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <div class="row">
+     <div class="col-md-2 admin-dashboard">
+         <%- include('tables') %>
+     </div>
+     <div class="col-md-10">
+        <div class = "container">
+            <div class="wrapper">
+                <form action="/receipt" method="POST" >
+                    <h3 class="form-signin-heading">RECEIPT WINDOW</h3>
+                <hr class="colorgraph"><br>
+                <label><b>Event:</b></label>
+                    <input list="events" type="text" class="form-control" name="nameEvent" placeholder="" required="" autofocus=""/> 
+                    <datalist id="events">
+                    <% for(var i=0; i<event.length; i++ ){ %>
+                        <option value="<%=event[i].nameEvent%>">
+                        <% } %>
+                    </datalist>
+                <label><b>Head:</b></label>
+                <input list="head" type="text" class="form-control" name="head" placeholder="" required="" autofocus="" />
+                    <datalist id="head">
+                            <option value="STALL">
+                            <option value="SPONSOR">
+                            <option value="TICKET">
+                            <option value="INVESTMENT">
+                            <option value="LOAN">
+                    </datalist>
+                <label><b>Name of Party:</b></label>
+                <input list="stall" type="text" class="form-control" amount : { type: Number }, id="party" name="nameParty" placeholder="" required="" autofocus="" onchange="calcAmount(this.value)"/>
+                <datalist id="stall">
+                    <% for(var i=0; i<stall.length; i++ ){ %>
+                        <option value="<%=stall[i].nameParty%>">
+                        <% } %>
+                    </datalist>
+                <label><b>Receipt Amount:</b></label>
+                <input type="number" id="amount" class="form-control" name="amount" placeholder="" required="" autofocus="" />
+                <label><b>Through:</b></label>
+                <input list="through" type="text" class="form-control" name="through" placeholder="" required="" autofocus="" />
+                    <datalist id="through">
+                            <option value="CASH">
+                            <option value="CHEQUE">
+                            <option value="NEFT">
+                            <option value="UPI">
+                    </datalist>
+                <label><b> Date:</b></label>
+                <input type="date" class="form-control" name="paymentDate" placeholder="" required="" autofocus="" />
+                <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+                </form>
+            </div>
+        </div>
+     </div>
+ </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+ <style>
+    .wrapper {
+      padding: 12px 20px;
+      margin: 20px;
+      border: 3px solid #f1f1f1;
+  
+  
+    }
+    input {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    }
+  
+  </style>
+ 
+ 

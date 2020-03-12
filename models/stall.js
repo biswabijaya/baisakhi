@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
     stallType:  {type: String, default: 'food'},
     stallFrom: {type: Number, default:0},
     stallTo: {type: Number, default:0},
-    rate: {type: [Number]},
+    rate: {type: Number},
     booked: {type : Date, default: Date.now}
   });
 

@@ -18,9 +18,9 @@
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <address>
-                        <strong>Event</strong>
+                        <strong><%=data.nameEvent%></strong> 
                         <br>
-                        Heading
+                        <%=data.head %>
                         <br>
                         Sub Heading
                         <br>
@@ -28,10 +28,10 @@
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 text-right">
                     <p>
-                        <em>Date: 9th March, 2020</em>
+                        <em><%=data.date %></em>
                     </p>
                     <p>
-                        <em>Receipt #: 12345</em>
+                        <em>Receipt #: <%=data.id %></em>
                     </p>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     <h2>Money Receipt</h2>
                 </div>
                 <div class=" col-md-12 text-body">
-                    <p>Received from <b>Name</b> towards <b>xyz</b> a sum of rupees <b>amount</b> only through <b>payment by</b> on <b>date</b></p> <br> <br> <br>
+                    <p>Received from <b><%=data.nameParty %></b> towards <b><%=data.nameEvent %></b> a sum of rupees <b><%=data.amount %></b> only through <b><%=data.through %></b> on <b><%=data.date %></b></p> <br> <br> <br>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <p>Thank you for your business.</p>
                     </div>

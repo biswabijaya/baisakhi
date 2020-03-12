@@ -6,6 +6,8 @@ const expensesSchema = require('../models/expenses.js')
 const eventSchema = require('../models/events.js')
 const paymentSchema = require('../models/payment.js')
 const stallTypeSchema = require('../models/stallType.js')
+const receiptSchema = require('../models/receipt.js')
+
 
 
 
@@ -36,6 +38,41 @@ router.get('/payment/:id', function(req, res) {
   }
   })
 });
+
+/* GET receipt page. */
+router.get('/receipt', function(req, res) {
+  eventSchema.find({},(err, data) => {
+    if (err) console.log(err);
+    else{
+      partySchema.find({},(err,data1) => {
+        if (err) console.log(err);
+        else{
+          stallSchema.find({},(err,data2) => {
+            if (err) console.log(err);
+            else{
+              res.render('receipt', { "event" : data, "party" : data1, "stall" : data2 });
+
+            }
+          });
+
+        }
+      });
+  }
+});  
+
+});
+
+
+/* GET receipt details*/
+
+router.post('/receipt', function(req, res) {
+  let newReceipt = new receiptSchema(req.body);
+  console.log(newReceipt)
+  newReceipt.save()
+    .then(res.render('moneyReceiptPage',{'data':newReceipt}))
+    .catch((err) => console.log(err))
+});
+
 
 /* GET expenses page. */
 router.get('/expenses', function(req, res) {
@@ -202,12 +239,6 @@ router.get('/eventMaster', function(req, res) {
       
 });
 
-/* GET moneyReceipt page */
-
-router.get('/moneyReceipt', function(req, res) {
-  res.render('moneyReceipt');
-      
-});
 
 
 //print receipt
@@ -245,15 +276,6 @@ router.post('/eventMaster', function(req, res) {
     .catch((err) => console.log(err))
 });
 
-/* GET moneyReceipt details*/
-
-router.post('/moneyReceipt', function(req, res) {
-  console.log(req.body);
-  let newMoneyReceipt = new paymentSchema(req.body);
-  newMoneyReceipt.save()
-    .then(res.redirect('/moneyReceiptPage'))
-    .catch((err) => console.log(err))
-});
 
 
 //GET stall details
