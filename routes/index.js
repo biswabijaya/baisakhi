@@ -218,7 +218,7 @@ router.get('/test', function(req, res) {
 //GET login Page
 router.post('/login', function(req, res) {
   if(req.body.username === "admin@xyz.com" && req.body.password === "admin"){
-    res.redirect('/display');
+    res.redirect('/eventMaster');
   } else {
     res.redirect('/');
   }
