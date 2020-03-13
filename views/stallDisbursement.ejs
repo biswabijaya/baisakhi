@@ -8,27 +8,30 @@
          <%- include('tables') %>
      </div>
      <div class="col-md-10">
-        <h3> EXPENSES </h3><br>
+        <h3> STALL DISBURSEMENT </h3><br>
         <table class="table table-striped" id="expensesTable">
             <thead>
                 <tr>
                     <th>Sl No</th>
-                    <th>HEAD</th>
-                    <th>SUBHEAD</th>
-                    <th>PAID TO</th>
-                    <th>AMOUNT</th>
+                    <th>PARTY NAME</th>
+                    <th>STALL TYPE</th>
+                    <th>RATE</th>
+                    <th></th>
 
                 </tr>
             </thead>
             <tbody>
-                <% for(var i = 0; i < payment.length; i++){  %>     
+                <% for(var i = 0; i < stall.length; i++){  %>     
      
                  <tr>
                      <td><%= i+1 %></td>
-                     <td><%= payment[i].head%></td>
-                     <td><%= payment[i].subHead %></td>
-                     <td><%= payment[i].paidTo %></td>
-                     <td><%= payment[i].amount %></td>
+                     <td><%= stall[i].nameParty%></td>
+                     <td><%= stall[i].stallType%></td>
+                     <td><%= stall[i].rate %></td>
+                     <td>
+                        <a class="btn btn-danger" href="/deleteStall/<%=stall[i].id %>"onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash" aria-hidden="true" title="delete"></i> Delete</a> &nbsp;&nbsp;        
+
+                     </td>
                  </tr>
              <% } %>
              </tbody>
@@ -38,16 +41,6 @@
  </div>
  
 <style>
-    #myInput
-      {
-      width: 400px;
-      font-size: 16px;
-      padding: 12px 20px 12px 40px;
-      border: 1px solid #ddd;
-      margin-bottom: 12px;
-      margin: 5px;
-    }
-
     #expensesTable{
         margin: 5px;
     }

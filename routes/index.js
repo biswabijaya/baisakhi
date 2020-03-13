@@ -73,6 +73,20 @@ router.post('/receipt', function(req, res) {
     .catch((err) => console.log(err))
 });
 
+/* GET moneyReceipt page. */
+router.get('/moneyReceipt', function(req, res) {
+  res.render('moneyReceipt');
+});
+
+/* GET moneyReceipt details*/
+
+router.post('/moneyReceipt', function(req, res) {
+  let newPayment = new paymentSchema(req.body);
+  console.log(newPayment)
+  newPayment.save()
+    .then(res.redirect('/moneyReceipt'))
+    .catch((err) => console.log(err))
+});
 
 /* GET expenses page. */
 router.get('/expenses', function(req, res) {
@@ -84,6 +98,18 @@ router.get('/expenses', function(req, res) {
 });  
 
 });
+
+/* GET stallDisbursement page. */
+router.get('/stallDisbursement', function(req, res) {
+  stallSchema.find({},(err, data) => {
+    if (err) console.log(err);
+    else{
+    res.render('stallDisbursement', { "stall" : data });
+  }
+});  
+
+});
+
 
 /* GET addExpenses page. */
 router.get('/addExpenses', function(req, res) {
@@ -356,7 +382,7 @@ router.get('/deleteStall/:id', function(req, res, next){
           console.log("error query");
   
       }
-  res.redirect('/stallAllocation/'+data[0].name+'')
+  res.redirect('/stallDisbursement/')
 })
 })
 });
