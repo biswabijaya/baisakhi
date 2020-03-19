@@ -2,28 +2,76 @@
         crossorigin="anonymous">
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
  <div class="row">
-     <div class="col-md-2 admin-dashboard">
+     <div class="col-md-2  style="margin: auto;"admin-dashboard">
          <%- include('tables') %>
      </div>
-     <div class="col-md-10">
+     <div class="col-md-10" style="padding: 30px;">
       <div class = "container">
-        <div class="wrapper">
+        <div class="wrapper card">
           <form action="/party" method="POST" >
               <h3 class="form-signin-heading">PARTY MASTER ENTRY</h3>
               <hr class="colorgraph"><br>
-              <label><b>Name of Party:</b></label>
-              <input type="text" class="form-control" name="nameParty" placeholder="Enter party name" required="" autofocus="" />
-              <label><b>Address:</b></label>
-              <input type="text" class="form-control" name="address" placeholder="Address" required="" autofocus="" />
-              <label><b>Phone Number:</b></label>
-              <input type="text" class="form-control" name="phoneNo" placeholder="Phone Number" required="" autofocus="" />
-              <label><b>District:</b></label>
-              <input type="text" class="form-control" name="district" placeholder="District" required="" autofocus="" />
-              <label><b>State:  </b></label>
-              <input type="text" class="form-control" name="state" placeholder="State" required="" autofocus="" />
-              <label><b>PinCode:  </b></label>
-              <input type="text" class="form-control" name="pin" placeholder="State" required="" autofocus="" />
-          <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>Name of Party:</b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="nameParty" placeholder="Enter party name" required="" autofocus="" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>Address:</b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="address" placeholder="Address" required="" autofocus="" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>Phone Number:</b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="phoneNo" placeholder="Phone Number" required="" autofocus="" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>District:</b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="district" placeholder="District" required="" autofocus="" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>State:  </b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="state" placeholder="State" required="" autofocus="" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>PinCode:  </b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="pin" placeholder="Pincode" required="" autofocus="" />
+                </div>
+              </div>
+
+              <div class="row justify-content-center">
+                <div class="col-md-2" style="margin: auto;"></div>
+                <div class="col-md-5">
+                  <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+                </div>
+              </div>
+
           </form>
         </div>
       </div>
@@ -32,9 +80,11 @@
  
  <style>
   .wrapper {
-    padding: 12px 20px;
+    padding: 12px 50px;
     margin: 20px;
     border: 3px solid #f1f1f1;
+    border-radius: 15px;
+    width: 800px;
 
 
   }
@@ -42,5 +92,9 @@
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
+  }
+
+  .card:hover{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
   }
 </style>

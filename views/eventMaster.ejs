@@ -5,36 +5,84 @@
      <div class="col-md-2 admin-dashboard">
          <%- include('tables') %>
      </div>
-     <div class="col-md-10">
+     <div class="col-md-10" style="padding: 10px;">
         <div class = "container">
-            <div class="wrapper">
+            <div class="wrapper card">
                 <form action="/eventMaster" method="POST" >
                     <h3 class="form-signin-heading">EVENT ENTRY</h3>
                 <hr class="colorgraph"><br>
-                <label><b>Event Name:</b></label>
-                <input type="text" class="form-control" name="nameEvent" placeholder="Event Name" required="" autofocus="" />
-                <label><b>Location:</b></label>
-                <input type="text" class="form-control" name="location" placeholder="Location" required="" autofocus="" />
-                <label><b>From:</b></label>
-                <input type="date" class="form-control" name="dateFrom" placeholder="" required="" autofocus="" />
-                <label><b>To:</b></label>
-                <input type="date" class="form-control" name="dateTo" placeholder="" required="" autofocus="" />
-                <label><b>No of Days:</b></label>
-                <input type="number" class="form-control" name="district" placeholder="no of days" required="" autofocus="" />
-                <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+                <div class="row">
+                    <div class="col-md-2 " style="margin: auto;">
+                        <label><b>Event Name:</b></label>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" name="nameEvent" placeholder="Event Name" required="" autofocus="" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 " style="margin: auto;">
+                        <label><b>Location:</b></label>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" name="location" placeholder="Location" required="" autofocus="" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 " style="margin: auto;">
+                        <label><b>From:</b></label>
+                    </div>
+                    <div class="col">
+                        <input type="date" id="date-1" class="form-control" name="dateFrom" placeholder="" required="" autofocus="" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 " style="margin: auto;">
+                        <label><b>To:</b></label>
+                    </div>
+                    <div class="col">
+                        <input type="date" id="date-2" class="form-control" name="dateTo" placeholder="" required="" autofocus="" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 " style="margin: auto;">
+                        <label><b>No of Days:</b></label>
+                    </div>
+                    <div class="col">
+                        <input type="number" class="form-control" name="district" placeholder="no of days" required="" autofocus="" />
+                    </div>
+                </div> <br>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-2 " style="margin: auto;"></div> 
+                    <div class="col-md-5">
+                        <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+                    </div>
+                </div>
                 </form>
             </div>
         </div>
      </div>
  </div>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script>
+        const element1 = document.getElementById('date-1');
+        element1.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+    </script>
+
+    <script>
+        const element2 = document.getElementById('date-2');
+        element2.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+    </script>
 
  <style>
     .wrapper {
-      padding: 12px 20px;
+      padding: 12px 50px;
       margin: 20px;
       border: 3px solid #f1f1f1;
+      border-radius: 15px;
   
   
     }
@@ -43,6 +91,10 @@
     margin: 8px 0;
     display: inline-block;
     }
+
+    .card:hover{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  }
   
   </style>
   

@@ -23,6 +23,7 @@ router.get('/stallType', function(req, res) {
   res.render('stallType');
 });
 
+
 /* GET home page. */
 router.get('/admin', function(req, res) {
   res.render('index');
@@ -292,6 +293,15 @@ router.post('/party', function(req, res) {
     .catch((err) => console.log(err))
 });
 
+/* GET partyModal details*/
+
+router.post('/partyModal', function(req, res) {
+  let newParty = new partySchema(req.body);
+  newParty.save()
+    .then(res.redirect('/allStalls'))
+    .catch((err) => console.log(err))
+});
+
 /* GET event details*/
 
 router.post('/eventMaster', function(req, res) {
@@ -492,5 +502,6 @@ router.post('/updateExpenses/:id', (req, res) => {
       });
     });
 });
+
 
 module.exports = router;

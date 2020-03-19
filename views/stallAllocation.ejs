@@ -1,73 +1,274 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous"> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
- <div class="row">
+ <div class="row" >
    <div class="col-md-2 admin-dashboard" >
     <%- include('tables') %>
 
    </div>
-   <div class="col-md-10 table-body">
+   <div class="col-md-10 table-body" style="padding: 10px;">
     <div class = "container">
-    	<div class="wrapper">
-        <form action="/addNewStall" method="POST" >
-          <h3 class="form-signin-heading">STALL ALLOTMENT</h3> 
-            <hr class="colorgraph"><br>
-            <label><b>Event:</b></label>
-            <input list="events" type="text" class="form-control" name="nameEvent" placeholder="" required="" autofocus=""/> 
-            <datalist id="events">
-              <% for(var i=0; i<event.length; i++ ){ %>
-                <option value="<%=event[i].nameEvent%>">
-                <% } %>
-            </datalist>
-            &nbsp;&nbsp; <a class="btn btn-secondary" href="/eventMaster"><i class="fa fa-plus"></i> Add Event</a> <br>
+    	<div class="wrapper card ">
+        <div class="row justify-content-center">
+          <div class="col-md-10">
+            <form action="/addNewStall" method="POST" >
+              <h3 class="form-signin-heading">STALL ALLOTMENT</h3> 
+                <hr class="colorgraph"><br>
+                  
+                <div class="row">
+                  <div style="margin: auto;" class="col-md-2">
+                    <label><b>Event:</b></label>
+                  </div>
+                  <div class="col">
+                    <input list="events" type="text" class="form-control" name="nameEvent" placeholder="" required="" autocomplete="off" autofocus/> 
+                    <datalist id="events">
+                      <% for(var i=0; i<event.length; i++ ){ %>
+                        <option value="<%=event[i].nameEvent%>">
+                        <% } %>
+                    </datalist>
+                  </div>
+                  <div style="margin: auto;" class="col-md-2">
+                    <a class="btn btn-secondary form-control" href="/eventMaster"><i class="fa fa-plus"></i> Add Event</a>
+                  </div>
+                </div>
+    
+                <div class="row">
+                  <div style="margin: auto;" class="col-md-2">
+                    <label><b>Name of Party:</b></label>
+                  </div>
+                  <div class="col">
+                    <input list="party" type="text" class="form-control" name="nameParty" placeholder="" autocomplete="off" required autofocus /> 
+                    <datalist id="party">
+                      <% for(var i=0; i<party.length; i++ ){ %>
+                        <option value="<%=party[i].nameParty%>">
+                        <% } %>
+                    </datalist>
+                  </div>
+                  <div style="margin: auto;" class="col-md-2">
+                    <a class="btn btn-secondary form-control " data-toggle="modal" data-target="#partyModal"><i class="fa fa-plus"></i> Add Party</a>
+                  </div>
+                </div>
+    
+                    <div class="row">
+                      <div style="margin: auto;" class="col-md-2"> 
+                        <label><b>Type of Stall:</b></label>
+                    </div>
+                    <div class="col">
+                      <input list="stallType" type="text" class="form-control" name="stallType" placeholder="Type of stall" autocomplete="off" required="" autofocus="" /> 
+                    <datalist id="stallType">
+                      <% for(var i=0; i<stallType.length; i++ ){ %>
+                        <option value="<%=stallType[i].stallType%>">
+                        <% } %>
+                    </datalist>
+                    </div>
+                    <div style="margin: auto;" class="col-md-2">
+                      <a class="btn btn-secondary form-control" data-toggle="modal" data-target="#stalltypeModal"><i class="fa fa-plus"></i> Stall Type</a>
+                    </div>
+                  </div>
+    
+                    <div class="row">
+                      <div style="margin: auto;" class="col-md-2"> 
+                        <label><b>Row From:</b></label>
+                    </div>
+                    <div class="col">
+                      <input type="number" class="form-control" name="stallFrom" placeholder="From" required="" autofocus="" min="1" />
+                    </div>
+                    <div style="margin: auto;" class="col-md-2"></div>
+                  </div>
+    
+                    <div class="row">
+                      <div style="margin: auto;" class="col-md-2"> 
+                        <label><b>Row To:</b></label>
+                    </div>
+                    <div class="col">
+                      <input type="number" class="form-control" name="stallTo" placeholder="To" required="" autofocus="" min="1" /> 
+                    </div>
+                    <div style="margin: auto;" class="col-md-2"></div>
+                  </div>
+    
+                    <div class="row">
+                      <div style="margin: auto;" class="col-md-2"> 
+                        <label><b>Rate:</b></label>
+                    </div>
+                    <div class="col">
+                      <input type="number" class="form-control" name="rate" placeholder="Enter total rent" required="" autofocus="" />
+                    </div>
+                    <div style="margin: auto;" class="col-md-2"></div>
+                  </div>
+    
+                    <div class="row">
+                      <div style="margin: auto;" class="col-md-2"> 
+                        <label><b>Booked on:</b></label>
+                    </div>
+                    <div class="col">
+                      <input type="date" id="date-input" class="form-control" name="booked" placeholder="" autofocus="" />
+                    </div>
+                    <div style="margin: auto;" class="col-md-2"></div>
+                  </div>
+    
+                  <div class="row justify-content-center">
 
-            <label><b>Name of Party:</b></label>
-            <input list="party" type="text" class="form-control" name="nameParty" placeholder="" required="" autofocus="" /> 
-            <datalist id="party">
-              <% for(var i=0; i<party.length; i++ ){ %>
-                <option value="<%=party[i].name%>">
-                <% } %>
-            </datalist>
-            &nbsp;&nbsp; <a class="btn btn-secondary" href="/party"><i class="fa fa-plus"></i> Add Party</a> <br>
+                  <div class="col-5">
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+                  </div>
 
-            <label><b>Type of Stall:</b></label>
-            <input list="stallType" type="text" class="form-control" name="stallType" placeholder="Type of stall" required="" autofocus="" /> 
-            <datalist id="stallType">
-              <% for(var i=0; i<stallType.length; i++ ){ %>
-                <option value="<%=stallType[i].stallType%>">
-                <% } %>
-            </datalist>
-            <a class="btn btn-secondary" href="/stallType"><i class="fa fa-plus"></i> Add New Type</a> <br>
-            <label><b>Row From:</b></label>
-            <input type="number" class="form-control" name="stallFrom" placeholder="From" required="" autofocus="" /> <br>
-            <label><b>Row To:</b></label>
-            <input type="number" class="form-control" name="stallTo" placeholder="To" required="" autofocus="" /> <br>
-
-            <label><b>Rate:</b></label>
-            <input type="number" class="form-control" name="rate" placeholder="Enter total rent" required="" autofocus="" /> <br>
-            <label><b>Booked on:</b></label>
-            <input type="date" class="form-control" name="booked" placeholder="" required="" autofocus="" /> <br>
-
-    		<button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
-    		</form>
+                </div>
+    
+                <!-- <div class="row">
+                  <div class="col-md-1">
+    
+                  </div>
+                  <div class="col">
+    
+                  </div>
+                  <div class="col-md-1">
+    
+                  </div>
+                </div> -->
+    
+            </form>
+          </div>
+        </div>
     	</div>
     </div>
     
    </div>
  </div>
 
+
+
+<!-- StallType Modal -->
+<div class="modal fade" id="stalltypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">STALL TYPE ENTRY</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/stallType" method="POST" >
+      <div class="form-group">
+            <input type="text" class="form-control" name="stallType" placeholder="Enter Stall Type" required="" autofocus=""/> 
+    	</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add stallType</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<!-- Party Master Modal -->
+
+<div class="modal fade" id="partyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">PARTY MASTER ENTRY</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/partyModal" method="POST" >
+        <div class="form-group">
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>Party:</b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="nameParty" placeholder="Enter party name" required="" autofocus="" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>Address:</b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="address" placeholder="Address" required="" autofocus="" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>Phone Number:</b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="phoneNo" placeholder="Phone Number" required="" autofocus="" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>District:</b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="district" placeholder="District" required="" autofocus="" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>State:  </b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="state" placeholder="State" required="" autofocus="" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2" style="margin: auto;">
+                  <label><b>PinCode:  </b></label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="pin" placeholder="Pincode" required="" autofocus="" />
+                </div>
+              </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add Party</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script>
+  const element = document.getElementById('date-input');
+  element.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+</script>
+ <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
  <style>
    .form-control{
      display: inline-block;
-     width: 70%;
    }
   .wrapper {
     padding: 12px 20px;
     margin: 20px;
     border: 3px solid #f1f1f1;
-
+    border-radius: 15px;
 
   }
+
+.form-group{
+  padding: 12px 20px;
+
+}
   input {
   padding: 12px 20px;
   margin: 8px 0;
@@ -75,5 +276,9 @@
   }
   label{
     text-align: right;
+  }
+
+  .card:hover{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
   }
 </style>
