@@ -27,19 +27,31 @@
      </div>
      <div class="col-md-10">
         <div class = "container">
-            <div class="wrapper">
+            <div class="wrapper card">
                 <form action="/receipt" method="POST" >
                     <h3 class="form-signin-heading">RECEIPT WINDOW</h3>
                 <hr class="colorgraph"><br>
-                <label><b>Event:</b></label>
-                    <input list="events" type="text" class="form-control" name="nameEvent" placeholder="" required="" autofocus=""/> 
+
+                <div class="row">
+                    <div class="col-md-2 offset-md-1">
+                        <label><b>Event:</b></label>
+                    </div>
+                    <div class="col-md-8">
+                        <input list="events" type="text" class="form-control" name="nameEvent" placeholder="" autocomplete="off" required="" autofocus=""/> 
                     <datalist id="events">
                     <% for(var i=0; i<event.length; i++ ){ %>
                         <option value="<%=event[i].nameEvent%>">
                         <% } %>
                     </datalist>
-                <label><b>Head:</b></label>
-                <input list="head" type="text" class="form-control" name="head" placeholder="" required="" autofocus="" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 offset-md-1">
+                        <label><b>Head:</b></label>
+                    </div>
+                    <div class="col-md-8">
+                        <input list="head" type="text" class="form-control" name="head" placeholder="" required="" autofocus="" />
                     <datalist id="head">
                             <option value="STALL">
                             <option value="SPONSOR">
@@ -47,31 +59,77 @@
                             <option value="INVESTMENT">
                             <option value="LOAN">
                     </datalist>
-                <label><b>Name of Party:</b></label>
-                <input list="stall" type="text" class="form-control" amount : { type: Number }, id="party" name="nameParty" placeholder="" required="" autofocus="" onchange="calcAmount(this.value)"/>
-                <datalist id="stall">
-                    <% for(var i=0; i<stall.length; i++ ){ %>
-                        <option value="<%=stall[i].nameParty%>">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 offset-md-1">
+                        <label><b>Name of Party:</b></label>
+                    </div>
+                    <div class="col-md-8">
+                        <input list="stall" type="text" class="form-control" amount : { type: Number }, id="party" name="nameParty" placeholder="" required="" autocomplete="off" autofocus="" onchange="calcAmount(this.value)"/>
+                    <datalist id="stall">
+                         <% for(var i=0; i<stall.length; i++ ){ %>
+                            <option value="<%=stall[i].nameParty%>">
                         <% } %>
                     </datalist>
-                <label><b>Receipt Amount:</b></label>
-                <input type="number" id="amount" class="form-control" name="amount" placeholder="" required="" autofocus="" />
-                <label><b>Through:</b></label>
-                <input list="through" type="text" class="form-control" name="through" placeholder="" required="" autofocus="" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 offset-md-1">
+                        <label><b>Receipt Amount:</b></label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="number" id="amount" class="form-control" name="amount" placeholder="" required="" autofocus="" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 offset-md-1">
+                        <label><b>Through:</b></label>
+                    </div>
+                    <div class="col-md-8">
+                        <input list="through" type="text" class="form-control" name="through" placeholder="" required="" autofocus="" />
                     <datalist id="through">
                             <option value="CASH">
                             <option value="CHEQUE">
                             <option value="NEFT">
                             <option value="UPI">
                     </datalist>
-                <label><b> Date:</b></label>
-                <input type="date" class="form-control" name="paymentDate" placeholder="" required="" autofocus="" />
-                <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2 offset-md-1">
+                        <label><b> Date:</b></label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="date" class="form-control" id="date-input" name="paymentDate" placeholder="" required="" autofocus="" />
+                    </div>
+                </div> <br>
+
+                <div class="row justify-content-end">
+                    <div class="col-md-2 offset-md-1"></div>
+                    <div class="col-md-4">
+                        <button class="btn btn-lg btn-primary btn-block" type="Submit">Add</button>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+                    
+                
+                
+                
                 </form>
             </div>
         </div>
      </div>
  </div>
+
+    <script>
+        const element = document.getElementById('date-input');
+        element.valueAsNumber = Date.now()-(new Date()).getTimezoneOffset()*60000;
+    </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 
@@ -80,6 +138,8 @@
       padding: 12px 20px;
       margin: 20px;
       border: 3px solid #f1f1f1;
+      border-radius: 15px;
+
   
   
     }
@@ -88,6 +148,10 @@
     margin: 8px 0;
     display: inline-block;
     }
+    
+    .card:hover{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  }
   
   </style>
  
