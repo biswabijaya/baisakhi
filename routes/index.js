@@ -296,10 +296,11 @@ router.post('/party', function(req, res) {
 /* GET partyModal details*/
 
 router.post('/partyModal', function(req, res) {
+  console.log(req.body);
   let newParty = new partySchema(req.body);
   newParty.save()
-    .then(res.redirect('/allStalls'))
-    .catch((err) => console.log(err))
+    // .then(res.redirect('/allStalls'))
+    // .catch((err) => console.log(err))
 });
 
 /* GET event details*/
@@ -319,19 +320,46 @@ router.post('/eventMaster', function(req, res) {
 router.post('/addStall', function(req, res) {
   console.log(req.body);
   let newStall = new stallSchema(req.body);
-  newStall.save()
-    .then(res.redirect('/display'))
-    .catch((err) => console.log(err))
+  if(newStall.save()){
+    res.json({success : "Data added successfully", status : 1 });
+  }
+  else{
+    res.json({success : "Data not added successfully", status : 0 });
+  }
+    // .then(return('1'))
+    // .catch((err) => console.log(err))
 });
 
 /* GET stallType details*/
 
-router.post('/stallType', function(req, res) {
-  let newStallType = new stallTypeSchema(req.body);
-  newStallType.save()
-    .then(res.redirect('/allStalls'))
-    .catch((err) => console.log(err))
+// router.post('/stallType', function(req, res) {
+//   let newStallType = new stallTypeSchema(req.body);
+//   newStallType.save()
+//     .then(res.redirect('/allStalls'))
+//     .catch((err) => console.log(err))
+// });
+
+router.post('/stallType' , (req, res, next) => {
+  var query = req.body.stallType;
+  stallTypeSchema.findOne({stallType:query}, function(err, newStallType){
+  if(err) Swal.fire(err);
+  if ( newStallType){
+    var flag = true;
+    console.log('stalltype already present');
+  } else {
+  var newStallType = new stallTypeSchema(req.body);
+  newStallType.save(function(err, newStallType) {
+  if(err) console.log(err);
+  else{
+    console.log('New example created');
+  res.redirect(`/allStalls`);
+  }
+  
+  });
+  }
+  });
 });
+
 
 //GET addNewstall details
 
