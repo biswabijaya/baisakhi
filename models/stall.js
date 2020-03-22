@@ -8,7 +8,8 @@ var Schema = mongoose.Schema;
     stallFrom: {type: Number, default:0},
     stallTo: {type: Number, default:0},
     rate: {type: Number},
-    booked: {type : Date, default: Date.now }
+    booked: {type : Date, default: Date.now },
+    paid: {type: [Number]}
   });
 
   var stall = mongoose.model('stalls',stallSchema);
