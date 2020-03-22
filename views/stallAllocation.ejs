@@ -1,6 +1,5 @@
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous"> -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
  <div class="row" >
@@ -39,7 +38,7 @@
                     <label><b>Name of Party:</b></label>
                   </div>
                   <div class="col">
-                    <input list="party" type="text" class="form-control" name="nameParty" placeholder="" autocomplete="off" required autofocus /> 
+                    <input list="party" type="text" class="form-control" name="nameParty" id="namePartyMain" placeholder="" autocomplete="off" required autofocus /> 
                     <datalist id="party">
                       <% for(var i=0; i<party.length; i++ ){ %>
                         <option value="<%=party[i].nameParty%>">
@@ -56,7 +55,7 @@
                         <label><b>Type of Stall:</b></label>
                     </div>
                     <div class="col">
-                      <input list="stallType" type="text" class="form-control" name="stallType" placeholder="Type of stall" autocomplete="off" required="" autofocus="" /> 
+                      <input list="stallType" type="text" class="form-control" name="stallType" id="stallTypeMain" placeholder="Type of stall" autocomplete="off" required="" autofocus="" /> 
                     <datalist id="stallType">
                       <% for(var i=0; i<stallType.length; i++ ){ %>
                         <option value="<%=stallType[i].stallType%>">
@@ -150,9 +149,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="/stallType" method="POST" >
+      <form action="/stallType" method="POST" id="stalltype_form">
       <div class="form-group">
-            <input type="text" class="form-control" name="stallType" placeholder="Enter Stall Type" required="" autofocus=""/> 
+            <input type="text" class="form-control" name="stallType" id="stallTypeModalInput" placeholder="Enter Stall Type" required="" autofocus=""/> 
     	</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -182,7 +181,7 @@
                   <label><b>Party:</b></label>
                 </div>
                 <div class="col">
-                  <input type="text" class="form-control" name="nameParty" placeholder="Enter party name" required="" autofocus="" />
+                  <input type="text" class="form-control" name="nameParty" id="namePartyModalInput"  placeholder="Enter party name" required="" autofocus="" />
                 </div>
               </div>
 
@@ -296,19 +295,67 @@
       type: 'post',
       url: '/partyModal',
       data:$('#party_form').serialize(),
-      dataType: 'json',
-      success: function(res){
-        console.log(res);
+      dataType: 'json'
+      
+    }).done(function(res){
+      console.log(res);
         if(res.status){
-          Swal.fire('Success');
+          Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: res.success,
+          showConfirmButton: false,
+          timer: 1500
+})
           $('#partyModal').modal('hide');
+          var opnval = $('#namePartyModalInput').val();
+          $('#party').append('<option>'+opnval+'</option>');
+          $('#namePartyMain').val(opnval);
         } else{
-          Swal.fire('NotSuccess');
+          Swal.fire({
+            title: res.success,
+            icon: 'error',
+            position: 'top',
+            timer: 1500,
+            showConfirmButton: false,
+          });
         }
-      }
-    });
+        });    
+  });
+
+  $('#stalltypeModal').on('submit',function (e){
+   e.preventDefault();
+    console.log('ajax');
+    $.ajax({
+      type: 'post',
+      url: '/stallType',
+      data:$('#stalltype_form').serialize(),
+      dataType: 'json'
       
-      
+    }).done(function(res){
+      console.log(res);
+        if(res.status){
+          Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: res.success,
+          showConfirmButton: false,
+          timer: 1500
+})
+          $('#stalltypeModal').modal('hide');
+          var opnval = $('#stallTypeModalInput').val();
+          $('#stallType').append('<option>'+opnval+'</option>');
+          $('#stallTypeMain').val(opnval);
+        } else{
+          Swal.fire({
+            title: res.success,
+            icon: 'error',
+            position: 'top',
+            timer: 1500,
+            showConfirmButton: false,
+          });
+        }
+        });    
   });
 
 </script>
