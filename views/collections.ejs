@@ -117,33 +117,34 @@
 
 <script>
   function addpayment(id) {
-    $('#stallid').val(id);
-    
-  }
+      $('#stallid').val(id);
+      $('#paymentModalInput').val();
+    }
+    $('#payment_form').on('submit', function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: 'post',
+        url: '/payment/' + $('#stallid').val(),
+        data: $('#payment_form').serialize(),
+        dataType: 'json'
 
-  $('#payment_form').on('submit',function (e){
-       e.preventDefault();
-    $.ajax({
-      type: 'post',
-      url: '/payment/'+ $('#stallid').val(),
-      data:$('#payment_form').serialize(),
-      dataType: 'json'
-      
-    }).done(function(res){
-      console.log(res);
-      if(res.status){
-        console.log('added');
-        $('#paymentModal').modal('hide');
-        // update paidamount and due amount
-        $('#paidAmount'+$('#stallid').val()).val(round(parseInt($('#paidAmount'+$('#stallid').val()).val))+parseInt($('#paymentModalInput').val()));
-            $('#dueAmount'+$('#stallid').val()).val(round(parseInt($('#dueAmount'+$('#stallid').val()).val))-parseInt($('#paymentModalInput').val()));
-            // empty modal inputs
-            $('#stallid').val();
-            $('#paymentModalInput').val();
-      }
-         
-        });    
-  });
+      }).done(function (res) {
+        console.log(res);
+        if (res.status) {
+          console.log('added');
+          $('#paymentModal').modal('toggle');
+          // update paidamount and due amount
+          $('#paidAmount'+$('#stallid').val()).val(Math.round(parseInt($('#paidAmount'+$('#stallid').val()).val)) + parseInt($('#paymentModalInput').val()));
+          $('#dueAmount'+$('#stallid').val()).val(Math.round(parseInt($('#dueAmount'+$('#stallid').val()).val)) - parseInt($('#paymentModalInput').val()));
+          
+
+          Toast.fire({
+            title: "Payment Suceesful!",
+            icon: "success"
+          });
+        }
+      });
+    });
 </script>
 
 
