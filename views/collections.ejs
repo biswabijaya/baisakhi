@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> 
  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
@@ -15,8 +14,8 @@
         <thead>
             <tr>
                 <th>Sl No</th>
-                <th>Vendor Name</th>
-                <th>Stall Name</th>
+                <th>Event Name</th>
+                <th>Party Name</th>
                 <th>Stall Type</th>
                 <th>Total</th>
                 <th>Paid</th>
@@ -26,10 +25,9 @@
         <tbody>
            <% for(var i = 0; i < stall.length; i++){  %>
             <% var arrSum = 0; %>
-            <% for(var j = 0; j < stall[i].rate.length; j++){ %>
-              <% var arrSum = arrSum + stall[i].rate[j]; %>
-            <% } %>
-
+            <% for(var j = 0; j < stall[i].paid.length; j++){ %>
+              <% var arrSum = arrSum + stall[i].paid[j]; %>
+            <% } %>  
 
             <tr>
                 <td><%= i+1 %></td>
@@ -37,7 +35,7 @@
                 <td><%= stall[i].nameParty %></td>
                 <td><%= stall[i].stallType %></td>
                 <td><%= stall[i].rate %></td>
-                <td><a href="/payment/<%- stall[i]._id %>"><%= arrSum %></a></td>
+                <td><a><%= arrSum %> <i class="fa fa-plus editbtn" onclick="addpayment('<%- stall[i].id %>')" data-toggle="modal" data-target="#paymentModal"></i></a></i></td>
                 <td><%= stall[i].rate - arrSum %></td>
 
             </tr>
@@ -47,6 +45,35 @@
     
    </div>
  </div>
+
+
+
+ <!-- Add Payment Modal -->
+<div class="modal fade " id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">PREVIOUS PAYMENTS</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" id="payment_form">
+        <div class="form-group">
+            <label><b>Next payment:</b></label>
+            <input type="hidden" name="id" id="stallid" >
+            <input type="number" class="form-control" name="paid" id="paymentModalInput" placeholder="Enter the amount" required="" autofocus="" />
+        </div>
+                
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add </button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  
  
  
 
@@ -59,8 +86,15 @@
     thead{
         background-color: #B0C4DE;
     }
-</style>
 
+    .form-group{
+  padding: 12px 20px;
+
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
@@ -80,6 +114,30 @@
         ]
     } );
 } );
+</script>
+
+<script>
+  function addpayment(id) {
+    $('#stallid').val(id);
+    $('#paymentModal').on('submit',function (e){
+       e.preventDefault();
+    
+    $.ajax({
+      type: 'post',
+      url: '/payment/'+id,
+      data:$('#payment_form').serialize(),
+      dataType: 'json'
+      
+    }).done(function(res){
+      console.log(res);
+      if(res.status){
+        console.log('added');
+        $('#paymentModal').modal('hide');
+      }
+         
+        });    
+  });
+  }
 </script>
 
 
