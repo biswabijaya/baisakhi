@@ -34,8 +34,7 @@ router.get('/payment/:id', function(req, res) {
   stallSchema.findOne({_id:req.params.id},(err,data) =>{
     if (err) console.log(err);
     else{
-      console.log(data);
-    res.render('payment', { "stall" : data });
+    res.render('collections', { "stall" : data });
   }
   })
 });
@@ -238,6 +237,18 @@ router.get('/collections', function(req, res) {
 
 });
 
+
+// router.get('/payment/:id', function(req, res) {
+//   stallSchema.findOne({_id:req.params.id},(err,data) =>{
+//     if (err) console.log(err);
+//     else{
+//       console.log(data);
+//     res.render('payment', { "stall" : data });
+//   }
+//   })
+// });
+
+
 //GET partyLedger page
 
 router.get('/partyLedger', function(req, res) {
@@ -298,7 +309,12 @@ router.post('/party', function(req, res) {
 router.post('/partyModal', function(req, res) {
   console.log(req.body);
   let newParty = new partySchema(req.body);
-  newParty.save()
+  if(newParty.save()){
+    res.json({success : "Data added successfully", status : 1 });
+  }
+  else{
+    res.json({success : "Data not added successfully", status : 0 });
+  }
     // .then(res.redirect('/allStalls'))
     // .catch((err) => console.log(err))
 });
@@ -317,18 +333,18 @@ router.post('/eventMaster', function(req, res) {
 
 //GET stall details
 
-router.post('/addStall', function(req, res) {
-  console.log(req.body);
-  let newStall = new stallSchema(req.body);
-  if(newStall.save()){
-    res.json({success : "Data added successfully", status : 1 });
-  }
-  else{
-    res.json({success : "Data not added successfully", status : 0 });
-  }
-    // .then(return('1'))
-    // .catch((err) => console.log(err))
-});
+// router.post('/addStall', function(req, res) {
+//   console.log(req.body);
+//   let newStall = new stallSchema(req.body);
+//   if(newStall.save()){
+//     res.json({success : "Data added successfully", status : 1 });
+//   }
+//   else{
+//     res.json({success : "Data not added successfully", status : 0 });
+//   }
+//     // .then(return('1'))
+//     // .catch((err) => console.log(err))
+// });
 
 /* GET stallType details*/
 
@@ -342,17 +358,14 @@ router.post('/addStall', function(req, res) {
 router.post('/stallType' , (req, res, next) => {
   var query = req.body.stallType;
   stallTypeSchema.findOne({stallType:query}, function(err, newStallType){
-  if(err) Swal.fire(err);
   if ( newStallType){
-    var flag = true;
-    console.log('stalltype already present');
+    res.json({success : "Stall Type already present", status : 0 });
   } else {
   var newStallType = new stallTypeSchema(req.body);
   newStallType.save(function(err, newStallType) {
   if(err) console.log(err);
   else{
-    console.log('New example created');
-  res.redirect(`/allStalls`);
+    res.json({success : "Stall Type added successfully", status : 1 });
   }
   
   });
@@ -505,10 +518,9 @@ router.post('/payment/:id', (req, res) => {
       stall.save((err, data) => {
         if (err) {
           console.log(err);
-          res.send("F");
         }
         else {
-          res.redirect('/collections');
+          res.json({success : "success", status : 1 });
         }
       });
     });
