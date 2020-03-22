@@ -52,3 +52,35 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+<script>
+      //custom swal by Pop.fire instead Swal.fire for popups
+
+  const Pop = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn-sm btn btn-success bg-success-dark-gradient',
+      cancelButton: 'btn-sm btn btn-danger bg-danger-dark-gradient',
+    },
+    showClass: {
+      popup: 'animated fadeInDown faster'
+    },
+    hideClass: {
+      popup: 'animated fadeOutUp faster'
+    },
+    buttonsStyling: true
+  });
+
+  //custom swal by Toast.fire for toasts 
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 4000,
+    timerProgressBar: true,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  });
+</script>

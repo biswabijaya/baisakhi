@@ -35,8 +35,8 @@
                 <td><%= stall[i].nameParty %></td>
                 <td><%= stall[i].stallType %></td>
                 <td><%= stall[i].rate %></td>
-                <td><a><%= arrSum %> <i class="fa fa-plus editbtn" onclick="addpayment('<%- stall[i].id %>')" data-toggle="modal" data-target="#paymentModal"></i></a></i></td>
-                <td><%= stall[i].rate - arrSum %></td>
+                <td><a id="paidAmount-<%- stall[i].id %>"><%= arrSum %></a> <i class="fa fa-plus editbtn" onclick="addpayment('<%- stall[i].id %>')" data-toggle="modal" data-target="#paymentModal"></i></td>
+                <td><a id="dueAmount-<%- stall[i].id %>"></a> <%= stall[i].rate - arrSum %></td>
 
             </tr>
         <% } %>
@@ -95,7 +95,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
@@ -118,26 +117,34 @@
 
 <script>
   function addpayment(id) {
-    $('#stallid').val(id);
-    $('#paymentModal').on('submit',function (e){
-       e.preventDefault();
-    
-    $.ajax({
-      type: 'post',
-      url: '/payment/'+id,
-      data:$('#payment_form').serialize(),
-      dataType: 'json'
-      
-    }).done(function(res){
-      console.log(res);
-      if(res.status){
-        console.log('added');
-        $('#paymentModal').modal('hide');
-      }
-         
-        });    
-  });
-  }
+      $('#stallid').val(id);
+      $('#paymentModalInput').val();
+    }
+    $('#payment_form').on('submit', function (e) {
+      e.preventDefault();
+      $.ajax({
+        type: 'post',
+        url: '/payment/' + $('#stallid').val(),
+        data: $('#payment_form').serialize(),
+        dataType: 'json'
+
+      }).done(function (res) {
+        console.log(res);
+        if (res.status) {
+          console.log('added');
+          $('#paymentModal').modal('toggle');
+          // update paidamount and due amount
+          $('#paidAmount'+$('#stallid').val()).val(Math.round(parseInt($('#paidAmount'+$('#stallid').val()).val)) + parseInt($('#paymentModalInput').val()));
+          $('#dueAmount'+$('#stallid').val()).val(Math.round(parseInt($('#dueAmount'+$('#stallid').val()).val)) - parseInt($('#paymentModalInput').val()));
+          
+
+          Toast.fire({
+            title: "Payment Suceesful!",
+            icon: "success"
+          });
+        }
+      });
+    });
 </script>
 
 
